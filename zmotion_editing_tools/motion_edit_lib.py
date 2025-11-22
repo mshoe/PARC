@@ -182,6 +182,15 @@ class MotionData:
         return
 
 def load_motion_file(motion_filepath, device="cpu"):
+    import sys
+    try:
+        import numpy.core
+        sys.modules['numpy._core'] = np.core
+        if hasattr(np.core, 'multiarray'):
+            sys.modules['numpy._core.multiarray'] = np.core.multiarray
+    except ImportError:
+        pass
+    
     with open(motion_filepath, "rb") as filestream:
         motion_data = pickle.load(filestream)
     return MotionData(motion_data, device=device)

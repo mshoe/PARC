@@ -1326,7 +1326,7 @@ class MDM(MotionGenerator):
 
             if not test_only:
                 if epoch % self._epochs_per_checkpoint == 0 and epoch > 0 and checkpoint_dir is not None:
-                    checkpoint_save_path = checkpoint_dir + "model_" + str(epoch) + ".pkl"
+                    checkpoint_save_path = checkpoint_dir / ("model_" + str(epoch) + ".pkl")
                     self.save(checkpoint_save_path)
 
         self._denoise_model.eval()
